@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selected = false
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        List {
+            Section(header: Text("zu kaufen")){
+                ForEach(1..<6) { i in
+                                Text("Hi")
+                            }
+            }
+            
+            Section(header: Text("erledigt")){
+                Text("Hi")//.bold()
+                Text("Hi")
+                Text("Hi")
+            }
+           
+        }
+         
+
     }
 }
 
