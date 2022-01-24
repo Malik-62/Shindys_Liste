@@ -1,0 +1,19 @@
+
+
+//Example JSON File
+
+
+
+
+{
+  "items" : [
+    {
+      "name" : "Kaffee",
+      "needed" : true
+    },
+    {
+      "name" : "Milch",
+      "needed" : false
+    }
+  ]
+}

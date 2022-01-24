@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    init(){
+        arrays=Arrays()
+        ListeLaden()
+        ListeLadn()
+    }
     // @State var blau = [Item]()
     // @State var rot = [Item]()
     @State var neuerName = ""
     @State var Schaukel = true
-    @State var blau = [Item(Name: "Eier"),Item(Name: "Milch"),Item(Name: "Mehl")]
-    @State var rot = [Item(Name: "Tomaten"),Item(Name: "Gurken"),Item(Name: "Paprika")]
+    @ObservedObject var arrays:Arrays
+    
     
     var body: some View {
         
@@ -26,20 +31,20 @@ struct ContentView: View {
             if Schaukel {
                 List {
                     Section(header: Text("einkaufen")){
-                        ForEach(0..<blau.count) { i in
-                            Button(blau[i].name) {
-                                rot.append(blau[i])
-                                blau.remove(at: i)
+                        ForEach(0..<arrays.blau.count) { i in
+                            Button(arrays.blau[i].name) {
+                                arrays.rot.append(arrays.blau[i])
+                                arrays.blau.remove(at: i)
                             }
                             
                         }
                     }.tint(.green)
                     
                     Section(header: Text("erledigt")){
-                        ForEach(0..<rot.count) { i in
-                            Button(rot[i].name) {
-                                blau.append(rot[i])
-                                rot.remove(at: i)
+                        ForEach(0..<arrays.rot.count) { i in
+                            Button(arrays.rot[i].name) {
+                                arrays.blau.append(arrays.rot[i])
+                                arrays.rot.remove(at: i)
                             }.tint(.red)
                         }
                     }
