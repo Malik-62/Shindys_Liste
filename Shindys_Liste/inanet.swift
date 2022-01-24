@@ -25,10 +25,60 @@ func ListeLaden()->Void{
         
         // Read HTTP Response Status code
         /*
-        if let response = response as? HTTPURLResponse {
-            print("Response HTTP Status code: \(response.statusCode)")
+         if let response = response as? HTTPURLResponse {
+         print("Response HTTP Status code: \(response.statusCode)")
+         }
+         */
+        // Convert HTTP Response Data to a simple String
+        if let data = data, let dataString = String(data: data, encoding: .utf8) {
+            print("Response data string:\n \(dataString)")
         }
-     */
+        
+    }
+    task.resume()
+}
+
+func ListeSchicken()->Void{
+    print("Liste wird geschickt")
+    let url = URL(string: "https://dasallergroesstehaus.com/mercurius/?usr=hans&pwd=12345")
+    guard let requestUrl = url else { fatalError() }
+    // Create URL Request
+    var request = URLRequest(url: requestUrl)
+    // Specify HTTP Method to use
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = """
+    {
+        "items" : [
+        {
+            "name" : "Aldi Schokolade",
+            "needed" : true
+        },
+        {
+            "name" : "Milch",
+            "needed" : false
+        }
+        ]
+    }
+"""
+    request.httpBody = postString.data(using: String.Encoding.utf8)
+    
+    // Send HTTP Request
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        // Check if Error took place
+        if let error = error {
+            print("Error took place \(error)")
+            return
+        }
+        
+        // Read HTTP Response Status code
+        /*
+         if let response = response as? HTTPURLResponse {
+         print("Response HTTP Status code: \(response.statusCode)")
+         }
+         */
         // Convert HTTP Response Data to a simple String
         if let data = data, let dataString = String(data: data, encoding: .utf8) {
             print("Response data string:\n \(dataString)")

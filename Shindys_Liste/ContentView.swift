@@ -10,7 +10,10 @@ import SwiftUI
 struct ContentView: View {
     init(){
         arrays=Arrays()
+        ListeSchicken()
+        
         ListeLaden()
+        
         ListeLadn()
     }
     // @State var blau = [Item]()
